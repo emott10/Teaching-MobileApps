@@ -45,7 +45,7 @@ namespace App1
             Button clear = FindViewById<Button>(Resource.Id.button15);
             Button enter = FindViewById<Button>(Resource.Id.button16);
 
-            var input = FindViewById<EditText>(Resource.Id.input);
+            var input = FindViewById<TextView>(Resource.Id.input);
 
 
             one.Click += delegate
@@ -139,26 +139,13 @@ namespace App1
             enter.Click += delegate
             {
                 myVib.Vibrate(30);
-<<<<<<< HEAD:projects/project 1/source/App1/App1/App1/MainActivity.cs
                 if (float.TryParse(this.str_input, out rh))
-=======
-                if (int.TryParse(this.str_input, out rh))
->>>>>>> bee53a42b2c4ca67979ca72c0c4a74f49087efd4:projects/project 1/source/App1/App1/MainActivity.cs
                 {
                     switch (sign)
                     {
                         case '+':
 
-<<<<<<< HEAD:projects/project 1/source/App1/App1/App1/MainActivity.cs
                             total = lh + rh;
-=======
-                        total.ToString();
-
-                        str_output += " = ";
-                        str_output += total;
-                        input.Text = str_output;
-                    }
->>>>>>> bee53a42b2c4ca67979ca72c0c4a74f49087efd4:projects/project 1/source/App1/App1/MainActivity.cs
 
                             total.ToString();
 
@@ -171,7 +158,6 @@ namespace App1
                         case '-':
                             total = lh - rh;
 
-<<<<<<< HEAD:projects/project 1/source/App1/App1/App1/MainActivity.cs
                             str_output += " = ";
                             str_output += total;
                             input.Text = str_output;
@@ -181,11 +167,6 @@ namespace App1
                         case '*':
 
                             total = lh * rh;
-=======
-                    else if (sign == '/')
-                    {
-                        total = lh / rh;
->>>>>>> bee53a42b2c4ca67979ca72c0c4a74f49087efd4:projects/project 1/source/App1/App1/MainActivity.cs
 
                             str_output += " = ";
                             str_output += total;
@@ -200,19 +181,10 @@ namespace App1
                             input.Text = str_output;
                             break;
                     }
-
-                    else
-                    {
-                        if (int.TryParse(this.str_input, out total)) 
-                        {
-                            str_output += " = ";
-                            str_output += total;
-                            input.Text = str_output;
-                        }
-                    }
                 }
 
                 this.str_input = null;
+                this.str_input += total;
                 this.str_output = null;
                 sign = 'n';
 
@@ -221,16 +193,10 @@ namespace App1
             add.Click += delegate
             {
                 myVib.Vibrate(30);
-<<<<<<< HEAD:projects/project 1/source/App1/App1/App1/MainActivity.cs
 
                 if (sign != 'n')
                 {
                     if (float.TryParse(this.str_input, out rh))
-=======
-                //if (!lh_full)
-                //{
-                if (int.TryParse(this.str_input, out lh))
->>>>>>> bee53a42b2c4ca67979ca72c0c4a74f49087efd4:projects/project 1/source/App1/App1/MainActivity.cs
                     {
                         switch (sign)
                         {
@@ -303,15 +269,9 @@ namespace App1
             minus.Click += delegate
             {
                 myVib.Vibrate(30);
-<<<<<<< HEAD:projects/project 1/source/App1/App1/App1/MainActivity.cs
                 if (sign != 'n')
                 {
                     if (float.TryParse(this.str_input, out rh))
-=======
-                //if (!lh_full)
-                //{
-                if (int.TryParse(this.str_input, out lh))
->>>>>>> bee53a42b2c4ca67979ca72c0c4a74f49087efd4:projects/project 1/source/App1/App1/MainActivity.cs
                     {
                         switch (sign)
                         {
@@ -384,16 +344,10 @@ namespace App1
             multiply.Click += delegate
             {
                 myVib.Vibrate(30);
-<<<<<<< HEAD:projects/project 1/source/App1/App1/App1/MainActivity.cs
 
                 if (sign != 'n')
                 {
                     if (float.TryParse(this.str_input, out rh))
-=======
-                //if (!lh_full)
-                //{
-                if (int.TryParse(this.str_input, out lh))
->>>>>>> bee53a42b2c4ca67979ca72c0c4a74f49087efd4:projects/project 1/source/App1/App1/MainActivity.cs
                     {
                         switch (sign)
                         {
@@ -467,16 +421,10 @@ namespace App1
             divide.Click += delegate
             {
                 myVib.Vibrate(30);
-<<<<<<< HEAD:projects/project 1/source/App1/App1/App1/MainActivity.cs
 
                 if (sign != 'n')
                 {
                     if (float.TryParse(this.str_input, out rh))
-=======
-                //if (!lh_full)
-                //{
-                if (int.TryParse(this.str_input, out lh))
->>>>>>> bee53a42b2c4ca67979ca72c0c4a74f49087efd4:projects/project 1/source/App1/App1/MainActivity.cs
                     {
                         switch (sign)
                         {
@@ -538,7 +486,7 @@ namespace App1
                 else
                 {
                     if (float.TryParse(this.str_input, out lh))
-                        
+
                         sign = '/';
                     str_output = str_input;
                     str_output += " / ";
