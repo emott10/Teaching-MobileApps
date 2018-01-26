@@ -14,11 +14,10 @@ namespace App1
     {
         string str_input;
         string str_output;
-        char sign;
-        int lh;
-        int rh;
-        int total;
-        bool lh_full = false;
+        char sign = 'n';
+        float lh;
+        float rh = 1;
+        float total;
         private Vibrator myVib;
 
         protected override void OnCreate(Bundle bundle)
@@ -59,6 +58,7 @@ namespace App1
 
             two.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '2';
                 this.str_output += '2';
                 input.Text = this.str_output;
@@ -66,6 +66,7 @@ namespace App1
 
             three.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '3';
                 this.str_output += '3';
                 input.Text = this.str_output;
@@ -73,6 +74,7 @@ namespace App1
 
             four.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '4';
                 this.str_output += '4';
                 input.Text = this.str_output;
@@ -80,6 +82,7 @@ namespace App1
 
             five.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '5';
                 this.str_output += '5';
                 input.Text = this.str_output;
@@ -87,6 +90,7 @@ namespace App1
 
             six.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '6';
                 this.str_output += '6';
                 input.Text = this.str_output;
@@ -94,6 +98,7 @@ namespace App1
 
             seven.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '7';
                 this.str_output += '7';
                 input.Text = this.str_output;
@@ -101,6 +106,7 @@ namespace App1
 
             eight.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '8';
                 this.str_output += '8';
                 input.Text = this.str_output;
@@ -108,6 +114,7 @@ namespace App1
 
             nine.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '9';
                 this.str_output += '9';
                 input.Text = this.str_output;
@@ -115,6 +122,7 @@ namespace App1
 
             zero.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input += '0';
                 this.str_output += '0';
                 input.Text = this.str_output;
@@ -122,6 +130,7 @@ namespace App1
 
             clear.Click += delegate
             {
+                myVib.Vibrate(30);
                 this.str_input = null;
                 this.str_output = null;
                 input.Text = this.str_input;
@@ -129,125 +138,360 @@ namespace App1
 
             enter.Click += delegate
             {
-                if (int.TryParse(this.str_input, out rh))
+                myVib.Vibrate(30);
+                if (float.TryParse(this.str_input, out rh))
                 {
-                    if (sign == '+')
+                    switch (sign)
                     {
-                        total = lh + rh;
+                        case '+':
 
-                        total.ToString();
-                        
-                        str_output += " = ";
-                        str_output += total;
-                        input.Text = str_output;
-                    }
+                            total = lh + rh;
 
-                    else if (sign == '-')
-                    {
-                        total = lh - rh;
+                            total.ToString();
 
-                        str_output += " = ";
-                        str_output += total;
-                        input.Text = str_output;
-                    }
+                            str_output += " = ";
+                            str_output += total;
+                            input.Text = str_output;
+                            break;
 
-                    else if (sign == '*')
-                    {
-                        total = lh * rh;
 
-                        str_output += " = ";
-                        str_output += total;
-                        input.Text = str_output;
-                    }
+                        case '-':
+                            total = lh - rh;
 
-                    else
-                    {
-                        total = lh / rh;
+                            str_output += " = ";
+                            str_output += total;
+                            input.Text = str_output;
+                            break;
 
-                        str_output += " = ";
-                        str_output += total;
-                        input.Text = str_output;
+
+                        case '*':
+
+                            total = lh * rh;
+
+                            str_output += " = ";
+                            str_output += total;
+                            input.Text = str_output;
+                            break;
+
+                        default:
+                            total = lh / rh;
+
+                            str_output += " = ";
+                            str_output += total;
+                            input.Text = str_output;
+                            break;
                     }
                 }
 
                 this.str_input = null;
                 this.str_output = null;
+                sign = 'n';
 
             };
 
             add.Click += delegate
             {
+                myVib.Vibrate(30);
 
-                //if (!lh_full)
-                //{
-                    if (int.TryParse(this.str_input, out lh))
+                if (sign != 'n')
+                {
+                    if (float.TryParse(this.str_input, out rh))
                     {
-                        lh_full = true;
+                        switch (sign)
+                        {
+                            case '+':
+
+                                total = lh + rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " + ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '+';
+                                break;
+
+
+                            case '-':
+                                total = lh - rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " + ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '+';
+                                break;
+
+
+                            case '*':
+
+                                total = lh * rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " + ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '+';
+                                break;
+
+                            default:
+                                total = lh / rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " + ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '+';
+                                break;
+                        }
                     }
-                //}
+                }
 
-                //else
-                //{
-                //    if (Int32.TryParse(str_input, out rh))
-                //    {
-
-                //        lh_full = true;
-                //    }
-                //}
-
-                sign = '+';
-                str_output = str_input;
-                str_output += " + ";
-                this.str_input = null;
-
+                else
+                {
+                    if (float.TryParse(this.str_input, out lh))
+                        sign = '+';
+                    str_output = str_input;
+                    str_output += " + ";
+                    input.Text = str_output;
+                    this.str_input = null;
+                }
             };
 
             minus.Click += delegate
             {
-                //if (!lh_full)
-                //{
-                    if (int.TryParse(this.str_input, out lh))
+                myVib.Vibrate(30);
+                if (sign != 'n')
+                {
+                    if (float.TryParse(this.str_input, out rh))
                     {
-                        lh_full = true;
-                    }
-                //}
+                        switch (sign)
+                        {
+                            case '+':
 
-                sign = '-';
-                str_output = str_input;
-                str_output += " - ";
-                this.str_input = null;
+                                total = lh + rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " - ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '-';
+                                break;
+
+
+                            case '-':
+                                total = lh - rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " - ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '-';
+                                break;
+
+
+                            case '*':
+
+                                total = lh * rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " - ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '-';
+                                break;
+
+                            default:
+                                total = lh / rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " - ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '-';
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    if (float.TryParse(this.str_input, out lh))
+
+                        sign = '-';
+                    str_output = str_input;
+                    str_output += " - ";
+                    input.Text = str_output;
+                    this.str_input = null;
+                }
             };
 
             multiply.Click += delegate
             {
-                //if (!lh_full)
-                //{
-                    if (int.TryParse(this.str_input, out lh))
-                    {
-                        lh_full = true;
-                    }
-               // }
+                myVib.Vibrate(30);
 
-                sign = '*';
-                str_output = str_input;
-                str_output += " * ";
-                this.str_input = null;
+                if (sign != 'n')
+                {
+                    if (float.TryParse(this.str_input, out rh))
+                    {
+                        switch (sign)
+                        {
+                            case '+':
+
+                                total = lh + rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " * ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '*';
+                                break;
+
+
+                            case '-':
+                                total = lh - rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " * ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '*';
+                                break;
+
+
+                            case '*':
+
+                                total = lh * rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " * ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '*';
+                                break;
+
+                            default:
+                                total = lh / rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " * ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '*';
+                                break;
+                        }
+                    }
+                }
+
+                else
+                {
+                    if (float.TryParse(this.str_input, out lh))
+
+                        sign = '*';
+                    str_output = str_input;
+                    str_output += " * ";
+                    input.Text = str_output;
+                    this.str_input = null;
+                }
             };
 
             divide.Click += delegate
             {
-                //if (!lh_full)
-                //{
-                    if (int.TryParse(this.str_input, out lh))
-                    {
-                        lh_full = true;
-                    }
-                //}
+                myVib.Vibrate(30);
 
-                sign = '/';
-                str_output = str_input;
-                str_output += " / ";
-                this.str_input = null;
+                if (sign != 'n')
+                {
+                    if (float.TryParse(this.str_input, out rh))
+                    {
+                        switch (sign)
+                        {
+                            case '+':
+
+                                total = lh + rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " / ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '/';
+                                break;
+
+
+                            case '-':
+                                total = lh - rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " / ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '/';
+                                break;
+
+
+                            case '*':
+
+                                total = lh * rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " / ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '/';
+                                break;
+
+                            default:
+                                total = lh / rh;
+
+                                str_output = null;
+                                lh = total;
+                                str_output += total;
+                                str_output += " / ";
+                                input.Text = str_output;
+                                str_input = null;
+                                sign = '/';
+                                break;
+                        }
+                    }
+                }
+
+                else
+                {
+                    if (float.TryParse(this.str_input, out lh))
+                        
+                        sign = '/';
+                    str_output = str_input;
+                    str_output += " / ";
+                    input.Text = str_output;
+                    this.str_input = null;
+                }
             };
 
 
