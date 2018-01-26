@@ -16,7 +16,7 @@ namespace App1
         string str_output;
         char sign = 'n';
         float lh;
-        float rh = 1;
+        float rh = 0;
         float total;
         private Vibrator myVib;
 
