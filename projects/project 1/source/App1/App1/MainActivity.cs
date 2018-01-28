@@ -12,12 +12,12 @@ namespace App1
     [Activity(Label = "Calculator", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        string str_input;
-        string str_output;
+        string str_input = null;
+        string str_output = null;
         char sign = 'n';
         float lh;
         float rh = 0;
-        float total;
+        float total = -1;
         private Vibrator myVib;
 
         protected override void OnCreate(Bundle bundle)
@@ -133,13 +133,18 @@ namespace App1
                 myVib.Vibrate(30);
                 this.str_input = null;
                 this.str_output = null;
-                input.Text = this.str_input;
+                input.Text = "0";
             };
 
             enter.Click += delegate
             {
                 myVib.Vibrate(30);
-                if (float.TryParse(this.str_input, out rh))
+                if (str_input == null)
+                {
+                    input.Text = "0";
+                }
+
+                else if (float.TryParse(this.str_input, out rh))
                 {
                     switch (sign)
                     {
@@ -181,12 +186,12 @@ namespace App1
                             input.Text = str_output;
                             break;
                     }
-                }
 
-                this.str_input = null;
-                this.str_input += total;
-                this.str_output = null;
-                sign = 'n';
+                    this.str_input = null;
+                    this.str_input += total;
+                    this.str_output = null;
+                    sign = 'n';
+                }
 
             };
 
