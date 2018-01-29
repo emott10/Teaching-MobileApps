@@ -44,7 +44,6 @@ namespace App1
             Button minus = FindViewById<Button>(Resource.Id.button14);
             Button clear = FindViewById<Button>(Resource.Id.button15);
             Button enter = FindViewById<Button>(Resource.Id.button16);
-
             var input = FindViewById<TextView>(Resource.Id.input);
 
 
@@ -133,6 +132,7 @@ namespace App1
                 myVib.Vibrate(30);
                 this.str_input = null;
                 this.str_output = null;
+                total = 0;
                 input.Text = "0";
             };
 
@@ -149,11 +149,8 @@ namespace App1
                     switch (sign)
                     {
                         case '+':
-
                             total = lh + rh;
-
                             total.ToString();
-
                             str_output += " = ";
                             str_output += total;
                             input.Text = str_output;
@@ -162,7 +159,6 @@ namespace App1
 
                         case '-':
                             total = lh - rh;
-
                             str_output += " = ";
                             str_output += total;
                             input.Text = str_output;
@@ -170,9 +166,7 @@ namespace App1
 
 
                         case '*':
-
                             total = lh * rh;
-
                             str_output += " = ";
                             str_output += total;
                             input.Text = str_output;
@@ -180,7 +174,6 @@ namespace App1
 
                         default:
                             total = lh / rh;
-
                             str_output += " = ";
                             str_output += total;
                             input.Text = str_output;
