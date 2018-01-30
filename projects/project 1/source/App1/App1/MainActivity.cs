@@ -14,9 +14,10 @@ namespace App1
     {
         string str_input = null;
         string str_output = null;
+        bool pressed_enter = false;
         char sign = 'n';
         float lh;
-        float rh = 0;
+        float rh;
         float total = -1;
         private Vibrator myVib;
 
@@ -49,6 +50,11 @@ namespace App1
 
             one.Click += delegate
             {
+                if(pressed_enter)
+                {
+                    this.str_input = null;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '1';
                 this.str_output += '1';
@@ -57,6 +63,12 @@ namespace App1
 
             two.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '2';
                 this.str_output += '2';
@@ -65,6 +77,12 @@ namespace App1
 
             three.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '3';
                 this.str_output += '3';
@@ -73,6 +91,12 @@ namespace App1
 
             four.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '4';
                 this.str_output += '4';
@@ -81,6 +105,12 @@ namespace App1
 
             five.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '5';
                 this.str_output += '5';
@@ -89,6 +119,12 @@ namespace App1
 
             six.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '6';
                 this.str_output += '6';
@@ -97,6 +133,12 @@ namespace App1
 
             seven.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '7';
                 this.str_output += '7';
@@ -105,6 +147,12 @@ namespace App1
 
             eight.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '8';
                 this.str_output += '8';
@@ -113,6 +161,12 @@ namespace App1
 
             nine.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '9';
                 this.str_output += '9';
@@ -121,6 +175,12 @@ namespace App1
 
             zero.Click += delegate
             {
+                if (pressed_enter)
+                {
+                    this.str_input = null;
+                    pressed_enter = false;
+                }
+
                 myVib.Vibrate(30);
                 this.str_input += '0';
                 this.str_output += '0';
@@ -182,6 +242,7 @@ namespace App1
 
                     this.str_input = null;
                     this.str_input += total;
+                    pressed_enter = true;
                     this.str_output = null;
                     sign = 'n';
                 }
