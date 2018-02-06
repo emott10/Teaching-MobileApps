@@ -8,7 +8,7 @@ using Android.Provider;
 
 namespace CameraExample
 {
-    [Activity(Label = "CameraExample", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "Image Manipulator", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
         /// <summary>
@@ -98,7 +98,7 @@ namespace CameraExample
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
             Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
-            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Alpha8, true);
+            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
             for(int i = 0; i < copyBitmap.Width; i++)
             {
                 for(int j = 0; j < copyBitmap.Height; j++)
@@ -110,7 +110,7 @@ namespace CameraExample
                     Android.Graphics.Color c = new Android.Graphics.Color(p);
                     
                     //TODO: fix
-                    //c.R = 0;
+                    c.R = 0;
                     copyBitmap.SetPixel(i, j, c);
                 }
             }
