@@ -98,27 +98,32 @@ namespace CameraExample
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
             Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
-            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
-            for(int i = 0; i < copyBitmap.Width; i++)
+
+            if (bitmap != null)
             {
-                for(int j = 0; j < copyBitmap.Height; j++)
+                Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+                for (int i = 0; i < copyBitmap.Width; i++)
                 {
-                    int p = copyBitmap.GetPixel(i, j);
-                    //00000000 00000000 00000000 00000000
-                    //long mask = (long)0xFF00FFFF;
-                    //p = p & (int)mask;
-                    Android.Graphics.Color c = new Android.Graphics.Color(p);
-                    
-                    //TODO: fix
-                    c.R = 0;
-                    copyBitmap.SetPixel(i, j, c);
+                    for (int j = 0; j < copyBitmap.Height; j++)
+                    {
+                        int p = copyBitmap.GetPixel(i, j);
+                        //00000000 00000000 00000000 00000000
+                        //long mask = (long)0xFF00FFFF;
+                        //p = p & (int)mask;
+                        Android.Graphics.Color c = new Android.Graphics.Color(p);
+
+                        //TODO: fix
+                        c.R = 0;
+                        copyBitmap.SetPixel(i, j, c);
+                    }
                 }
-            }
-            if (copyBitmap != null)
-            {
-                imageView.SetImageBitmap(copyBitmap);
-                imageView.Visibility = Android.Views.ViewStates.Visible;
-                copyBitmap = null;
+
+                if (copyBitmap != null)
+                {
+                    imageView.SetImageBitmap(copyBitmap);
+                    imageView.Visibility = Android.Views.ViewStates.Visible;
+                    copyBitmap = null;
+                }
             }
 
             // Dispose of the Java side bitmap.
