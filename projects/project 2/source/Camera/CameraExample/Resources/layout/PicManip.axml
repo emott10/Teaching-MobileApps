@@ -3,15 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ScrollView>
-        <HorizontalScrollView>
-            <TableLayout>
-                <Button
-                    android:id="@+id/launchCameraButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Open Camera" />
-            </TableLayout>
-        </HorizontalScrollView>
-    </ScrollView>
+    <ImageView
+        android:visibility="invisible"
+        android:layout_width="fill_parent"
+        android:layout_height="300.0dp"
+        android:id="@+id/takenPictureImageView"
+        android:adjustViewBounds="true" />
+    <Button
+        android:id="@+id/Test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test" />
 </LinearLayout>

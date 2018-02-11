@@ -74,12 +74,9 @@ namespace CameraExample
             StartActivityForResult(intent, 0);
         }
 
-        // <summary>
+       
         // Called automatically whenever an activity finishes
-        // </summary>
-        // <param name = "requestCode" ></ param >
-        // < param name="resultCode"></param>
-        /// <param name="data"></param>
+
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
@@ -99,32 +96,37 @@ namespace CameraExample
             int width = imageView.Height;
             Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
 
-            if (bitmap != null)
-            {
-                Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
-                for (int i = 0; i < copyBitmap.Width; i++)
-                {
-                    for (int j = 0; j < copyBitmap.Height; j++)
-                    {
-                        int p = copyBitmap.GetPixel(i, j);
-                        //00000000 00000000 00000000 00000000
-                        //long mask = (long)0xFF00FFFF;
-                        //p = p & (int)mask;
-                        Android.Graphics.Color c = new Android.Graphics.Color(p);
+            ////Call the new activity and pass it the bitmap
+            //Intent act_switch = new Intent(this, ImageEditor.class);
+            //act_switch.putExtra("map", bitmap);
+            //StartActivity(act_switch);
 
-                        //TODO: fix
-                        c.R = 0;
-                        copyBitmap.SetPixel(i, j, c);
-                    }
-                }
+            //if (bitmap != null)
+            //{
+            //    Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+            //    for (int i = 0; i < copyBitmap.Width; i++)
+            //    {
+            //        for (int j = 0; j < copyBitmap.Height; j++)
+            //        {
+            //            int p = copyBitmap.GetPixel(i, j);
+            //            //00000000 00000000 00000000 00000000
+            //            //long mask = (long)0xFF00FFFF;
+            //            //p = p & (int)mask;
+            //            Android.Graphics.Color c = new Android.Graphics.Color(p);
 
-                if (copyBitmap != null)
-                {
-                    imageView.SetImageBitmap(copyBitmap);
-                    imageView.Visibility = Android.Views.ViewStates.Visible;
-                    copyBitmap = null;
-                }
-            }
+            //            //TODO: fix
+            //            c.R = 0;
+            //            copyBitmap.SetPixel(i, j, c);
+            //        }
+            //    }
+
+            //    if (copyBitmap != null)
+            //    {
+            //        imageView.SetImageBitmap(copyBitmap);
+            //        imageView.Visibility = Android.Views.ViewStates.Visible;
+            //        copyBitmap = null;
+            //    }
+            //}
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();
