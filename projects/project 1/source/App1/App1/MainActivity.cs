@@ -50,141 +50,213 @@ namespace App1
 
             one.Click += delegate
             {
-                if(pressed_enter)
+                myVib.Vibrate(30);
+
+                if (pressed_enter)
                 {
                     this.str_input = null;
+                    pressed_enter = false;
+                    this.str_input += '1';
+                    this.str_output += '1';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '1';
-                this.str_output += '1';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '1';
+                    this.str_output += '1';
+                    input.Text = this.str_output;
+                }
             };
 
             two.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '2';
+                    this.str_output += '2';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '2';
-                this.str_output += '2';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '2';
+                    this.str_output += '2';
+                    input.Text = this.str_output;
+                }
             };
 
             three.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '3';
+                    this.str_output += '3';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '3';
-                this.str_output += '3';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '3';
+                    this.str_output += '3';
+                    input.Text = this.str_output;
+                }
+
             };
 
             four.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '4';
+                    this.str_output += '4';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '4';
-                this.str_output += '4';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '4';
+                    this.str_output += '4';
+                    input.Text = this.str_output;
+                }
             };
 
             five.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '5';
+                    this.str_output += '5';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '5';
-                this.str_output += '5';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '5';
+                    this.str_output += '5';
+                    input.Text = this.str_output;
+                }
             };
 
             six.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '6';
+                    this.str_output += '6';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '6';
-                this.str_output += '6';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '6';
+                    this.str_output += '6';
+                    input.Text = this.str_output;
+                }
             };
 
             seven.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '7';
+                    this.str_output += '7';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '7';
-                this.str_output += '7';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '7';
+                    this.str_output += '7';
+                    input.Text = this.str_output;
+                }
             };
 
             eight.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '8';
+                    this.str_output += '8';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '8';
-                this.str_output += '8';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '8';
+                    this.str_output += '8';
+                    input.Text = this.str_output;
+                }
             };
 
             nine.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '9';
+                    this.str_output += '9';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '9';
-                this.str_output += '9';
-                input.Text = this.str_output;
+                else if (str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '9';
+                    this.str_output += '9';
+                    input.Text = this.str_output;
+                }
             };
 
             zero.Click += delegate
             {
+                myVib.Vibrate(30);
+
                 if (pressed_enter)
                 {
                     this.str_input = null;
                     pressed_enter = false;
+                    this.str_input += '0';
+                    this.str_output += '0';
+                    input.Text = this.str_output;
                 }
 
-                myVib.Vibrate(30);
-                this.str_input += '0';
-                this.str_output += '0';
-                input.Text = this.str_output;
+                else if(str_input == null || str_input.Length < 10)
+                {
+                    this.str_input += '0';
+                    this.str_output += '0';
+                    input.Text = this.str_output;
+                }
             };
 
             clear.Click += delegate
@@ -193,6 +265,8 @@ namespace App1
                 this.str_input = null;
                 this.str_output = null;
                 total = 0;
+                sign = 'n';
+                pressed_enter = false;
                 input.Text = "0";
             };
 
@@ -201,7 +275,11 @@ namespace App1
                 myVib.Vibrate(30);
                 if (str_input == null)
                 {
-                    input.Text = "0";
+                    input.Text = "ERROR";
+                    this.str_input = null;
+                    this.str_output = null;
+                    total = 0;
+                    sign = 'n';
                 }
 
                 else if (float.TryParse(this.str_input, out rh))
@@ -232,11 +310,18 @@ namespace App1
                             input.Text = str_output;
                             break;
 
-                        default:
+                        case '/':
                             total = lh / rh;
                             str_output += " = ";
                             str_output += total;
                             input.Text = str_output;
+                            break;
+
+                        default:
+                            str_output += " = ";
+                            str_output += rh;
+                            input.Text = str_output;
+                            total = rh;
                             break;
                     }
 
