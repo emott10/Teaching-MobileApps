@@ -41,47 +41,63 @@ namespace CameraExample
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int theme_devicedefault_background = 2131099648;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06000b
-			public const int AddNoise = 2131099659;
+			// aapt resource value: 0x7f08000b
+			public const int AddNoise = 2131230731;
 			
-			// aapt resource value: 0x7f060009
-			public const int Greyscale = 2131099657;
+			// aapt resource value: 0x7f080009
+			public const int Greyscale = 2131230729;
 			
-			// aapt resource value: 0x7f06000a
-			public const int HighContrast = 2131099658;
+			// aapt resource value: 0x7f08000a
+			public const int HighContrast = 2131230730;
 			
-			// aapt resource value: 0x7f060008
-			public const int NegBlue = 2131099656;
+			// aapt resource value: 0x7f080008
+			public const int NegBlue = 2131230728;
 			
-			// aapt resource value: 0x7f060007
-			public const int NegGreen = 2131099655;
+			// aapt resource value: 0x7f080007
+			public const int NegGreen = 2131230727;
 			
-			// aapt resource value: 0x7f060006
-			public const int NegRed = 2131099654;
+			// aapt resource value: 0x7f080006
+			public const int NegRed = 2131230726;
 			
-			// aapt resource value: 0x7f060005
-			public const int RemBlue = 2131099653;
+			// aapt resource value: 0x7f080005
+			public const int RemBlue = 2131230725;
 			
-			// aapt resource value: 0x7f060004
-			public const int RemGreen = 2131099652;
+			// aapt resource value: 0x7f080004
+			public const int RemGreen = 2131230724;
 			
-			// aapt resource value: 0x7f060003
-			public const int RemRed = 2131099651;
+			// aapt resource value: 0x7f080003
+			public const int RemRed = 2131230723;
 			
-			// aapt resource value: 0x7f06000c
-			public const int Revert = 2131099660;
+			// aapt resource value: 0x7f08000c
+			public const int Revert = 2131230732;
 			
-			// aapt resource value: 0x7f060000
-			public const int launchCameraButton = 2131099648;
+			// aapt resource value: 0x7f080000
+			public const int launchCameraButton = 2131230720;
 			
-			// aapt resource value: 0x7f060001
-			public const int openGallery = 2131099649;
+			// aapt resource value: 0x7f080001
+			public const int openGallery = 2131230721;
 			
-			// aapt resource value: 0x7f060002
-			public const int takenPictureImageView = 2131099650;
+			// aapt resource value: 0x7f080002
+			public const int takenPictureImageView = 2131230722;
 			
 			static Id()
 			{
@@ -143,6 +159,22 @@ namespace CameraExample
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int Theme_Custom = 2131165184;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}

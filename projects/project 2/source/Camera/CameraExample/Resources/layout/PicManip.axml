@@ -18,78 +18,102 @@
             <TextView
                 android:text="Remove Color"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#ffffffff" />
             <Button
                 android:id="@+id/RemRed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Remove Red" />
+                android:text="Remove Red"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Button
                 android:id="@+id/RemGreen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Remove Green" />
+                android:text="Remove Green"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Button
                 android:id="@+id/RemBlue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Remove Blue" />
+                android:text="Remove Blue"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Space
                 android:layout_height="16dp"
                 android:layout_width="wrap_content" />
             <TextView
                 android:text="Negate Color"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#ffffffff" />
             <Button
                 android:id="@+id/NegRed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Negate Red" />
+                android:text="Negate Red"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Button
                 android:id="@+id/NegGreen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Negate Green" />
+                android:text="Negate Green"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Button
                 android:id="@+id/NegBlue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Negate Blue" />
+                android:text="Negate Blue"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Space
                 android:layout_height="16dp"
                 android:layout_width="wrap_content" />
             <TextView
                 android:text="Other"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#ffffffff" />
             <Button
                 android:id="@+id/Greyscale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Greyscale" />
+                android:text="Greyscale"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Button
                 android:id="@+id/HighContrast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="High Contrast" />
+                android:text="High Contrast"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Button
                 android:id="@+id/AddNoise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Noise" />
+                android:text="Add Noise"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Space
                 android:layout_height="16dp"
                 android:layout_width="wrap_content" />
             <TextView
                 android:text="Remove all Filters"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#ffffffff" />
             <Button
                 android:id="@+id/Revert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Revert to Original" />
+                android:text="Revert to Original"
+                android:textColor="#000000"
+                android:backgroundTint="#ff546e7a" />
             <Space
                 android:layout_height="16dp"
                 android:layout_width="wrap_content" />

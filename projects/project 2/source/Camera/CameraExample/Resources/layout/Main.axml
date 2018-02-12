@@ -2,15 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#ffb2dfdb">
     <Button
         android:id="@+id/launchCameraButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Take New Photo" />
+        android:text="Take New Photo"
+        android:backgroundTint="#ff546e7a"
+        android:textColor="#ffffffff"/>
     <Button
         android:id="@+id/openGallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pick Photo from Gallery" />
+        android:text="Pick Photo from Gallery"
+        android:backgroundTint="#ff546e7a"
+        android:textColor="#ffffffff"/>
 </LinearLayout>

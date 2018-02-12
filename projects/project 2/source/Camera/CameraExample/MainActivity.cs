@@ -19,13 +19,27 @@ namespace CameraExample
         // Used to track the directory that we'll be writing to between functions
         public static Java.IO.File _dir;
 
+        public override void OnBackPressed()
+        {
+            SetContentView(Resource.Layout.Main);
+            Toast.MakeText(this, "Back Button Pressed", ToastLength.Short).Show();
+
+            //needed for the layout.main buttons to work
+            if (IsThereAnAppToTakePictures() == true)
+            {
+                CreateDirectoryForPictures();
+                FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
+                Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
+                openGallery.Click += openGalleryClick;
+            }
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
 
             if (IsThereAnAppToTakePictures() == true)
             {
@@ -34,15 +48,10 @@ namespace CameraExample
                 Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
                 openGallery.Click += openGalleryClick;
             }
-
-
         }
 
-        // <summary>
         // Apparently, some android devices do not have a camera.  To guard against this,
         // we need to make sure that we can take pictures before we actually try to take a picture.
-        // </summary>
-        // <returns></returns>
         private bool IsThereAnAppToTakePictures()
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
@@ -52,9 +61,7 @@ namespace CameraExample
             return availableActivities != null && availableActivities.Count > 0;
         }
 
-        // <summary>
         // Creates a directory on the phone that we can place our images
-        // </summary>
         private void CreateDirectoryForPictures()
         {
             _dir = new Java.IO.File(
@@ -92,6 +99,8 @@ namespace CameraExample
         {
             base.OnActivityResult(requestCode, resultCode, data);
             SetContentView(Resource.Layout.PicManip);
+            bool reverted = true;
+            Android.Graphics.Bitmap copyBitmap = null;
 
             Button remred = FindViewById<Button>(Resource.Id.RemRed);
             Button remgreen = FindViewById<Button>(Resource.Id.RemGreen);
@@ -133,12 +142,31 @@ namespace CameraExample
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
             Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
-            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
-            imageView.SetImageBitmap(copyBitmap);
+
+            if (bitmap != null)
+            {
+                copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+                imageView.SetImageBitmap(copyBitmap);
+            }
+
+            else
+            {
+                //If bitmap is null takes the user back to the original screen
+                SetContentView(Resource.Layout.Main);
+
+                //needed for the layout.main buttons to work
+                if (IsThereAnAppToTakePictures() == true)
+                {
+                    CreateDirectoryForPictures();
+                    FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
+                    Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
+                    openGallery.Click += openGalleryClick;
+                }
+            }
 
             remred.Click += delegate
             {
-
+                //remred.SetBackgroundColor(Android.Graphics.Color.ParseColor("#ff5e5e"));
                 for (int i = 0; i < copyBitmap.Width; i++)
                 {
                     for (int j = 0; j < copyBitmap.Height; j++)
@@ -152,11 +180,11 @@ namespace CameraExample
                 }
 
                 imageView.SetImageBitmap(copyBitmap);
+                reverted = false;
             };
 
             remgreen.Click += delegate
             {
-
                 for (int i = 0; i < copyBitmap.Width; i++)
                 {
                     for (int j = 0; j < copyBitmap.Height; j++)
@@ -170,7 +198,7 @@ namespace CameraExample
                 }
 
                 imageView.SetImageBitmap(copyBitmap);
-
+                reverted = false;
             };
 
             remblue.Click += delegate
@@ -188,6 +216,7 @@ namespace CameraExample
                 }
 
                 imageView.SetImageBitmap(copyBitmap);
+                reverted = false;
             };
 
             negred.Click += delegate
@@ -206,6 +235,7 @@ namespace CameraExample
                 }
 
                 imageView.SetImageBitmap(copyBitmap);
+                reverted = false;
             };
 
             neggreen.Click += delegate
@@ -224,6 +254,7 @@ namespace CameraExample
                 }
 
                 imageView.SetImageBitmap(copyBitmap);
+                reverted = false;
             };
 
             negblue.Click += delegate
@@ -242,6 +273,7 @@ namespace CameraExample
                 }
 
                 imageView.SetImageBitmap(copyBitmap);
+                reverted = false;
             };
 
             greyscale.Click += delegate
@@ -266,6 +298,7 @@ namespace CameraExample
                     }
                 }
                 imageView.SetImageBitmap(copyBitmap);
+                reverted = false;
             };
 
             high_cont.Click += delegate
@@ -318,6 +351,7 @@ namespace CameraExample
                     }
                 }
                 imageView.SetImageBitmap(copyBitmap);
+                reverted = false;
             };
 
             add_noise.Click += delegate
@@ -336,70 +370,70 @@ namespace CameraExample
                         int b_temp = c.B;
 
                         if (rand_val < 0)
+                        {
+                            if ((r_temp + rand_val) < 0)
                             {
-                                if ((r_temp + rand_val) < 0)
-                                {
-                                    r_temp = 0;
-                                }
-
-                                else
-                                {
-                                    r_temp += rand_val;
-                                }
-
-                                if ((g_temp + rand_val) < 0)
-                                {
-                                    g_temp = 0;
-                                }
-
-                                else
-                                {
-                                    g_temp += rand_val;
-                                }
-
-                                if ((b_temp + rand_val) < 0)
-                                {
-                                    b_temp = 0;
-                                }
-
-                                else
-                                {
-                                    b_temp += rand_val;
-                                }
+                                r_temp = 0;
                             }
 
                             else
                             {
-                                if ((r_temp + rand_val) > 255)
-                                {
-                                    r_temp = 255;
-                                }
-
-                                else
-                                {
-                                    r_temp += rand_val;
-                                }
-
-                                if ((g_temp + rand_val) > 255)
-                                {
-                                    g_temp = 255;
-                                }
-
-                                else
-                                {
-                                    g_temp += rand_val;
-                                }
-
-                                if ((b_temp + rand_val) > 255)
-                                {
-                                    b_temp = 255;
-                                }
-
-                                else
-                                {
-                                    b_temp += rand_val;
-                                }
+                                r_temp += rand_val;
                             }
+
+                            if ((g_temp + rand_val) < 0)
+                            {
+                                g_temp = 0;
+                            }
+
+                            else
+                            {
+                                g_temp += rand_val;
+                            }
+
+                            if ((b_temp + rand_val) < 0)
+                            {
+                                b_temp = 0;
+                            }
+
+                            else
+                            {
+                                b_temp += rand_val;
+                            }
+                        }
+
+                        else
+                        {
+                            if ((r_temp + rand_val) > 255)
+                            {
+                                r_temp = 255;
+                            }
+
+                            else
+                            {
+                                r_temp += rand_val;
+                            }
+
+                            if ((g_temp + rand_val) > 255)
+                            {
+                                g_temp = 255;
+                            }
+
+                            else
+                            {
+                                g_temp += rand_val;
+                            }
+
+                            if ((b_temp + rand_val) > 255)
+                            {
+                                b_temp = 255;
+                            }
+
+                            else
+                            {
+                                b_temp += rand_val;
+                            }
+                        }
 
                         c.R = Convert.ToByte(r_temp);
                         c.G = Convert.ToByte(g_temp);
@@ -409,14 +443,17 @@ namespace CameraExample
                 }
 
                 imageView.SetImageBitmap(copyBitmap);
+                reverted = false;
             };
 
             revert.Click += delegate
             {
-                if (copyBitmap != null)
+                if (bitmap != null && !reverted)
                 {
+                    //remred.SetBackgroundColor(Android.Graphics.Color.ParseColor("#ff546e7a"));
                     copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
                     imageView.SetImageBitmap(copyBitmap);
+                    reverted = true;
                 }
             };
 
