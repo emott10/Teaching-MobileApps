@@ -4,14 +4,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
-        android:visibility="invisible"
         android:layout_width="fill_parent"
         android:layout_height="300.0dp"
         android:id="@+id/takenPictureImageView"
         android:adjustViewBounds="true" />
-    <Button
-        android:id="@+id/Test"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Test" />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="Remove Color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/RemRed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remove Red" />
+            <Button
+                android:id="@+id/RemGreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remove Green" />
+            <Button
+                android:id="@+id/RemBlue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remove Blue" />
+            <Space
+                android:layout_height="16dp"
+                android:layout_width="wrap_content" />
+            <TextView
+                android:text="Negate Color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/NegRed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Negate Red" />
+            <Button
+                android:id="@+id/NegGreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Negate Green" />
+            <Button
+                android:id="@+id/NegBlue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Negate Blue" />
+            <Space
+                android:layout_height="16dp"
+                android:layout_width="wrap_content" />
+            <TextView
+                android:text="Other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/Greyscale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Greyscale" />
+            <Button
+                android:id="@+id/HighContrast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="High Contrast" />
+            <Button
+                android:id="@+id/AddNoise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Noise" />
+            <Space
+                android:layout_height="16dp"
+                android:layout_width="wrap_content" />
+            <TextView
+                android:text="Remove all Filters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/Revert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Revert to Original" />
+            <Space
+                android:layout_height="16dp"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

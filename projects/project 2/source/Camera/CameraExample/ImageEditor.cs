@@ -16,8 +16,6 @@ namespace CameraExample
     [Activity(Label = "Pick a Filter")]
     public class ImageEditor : Activity
     {
-        Bitmap map;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -25,8 +23,9 @@ namespace CameraExample
             SetContentView(Resource.Layout.PicManip);
 
             //get the data from the previous activity
-            Intent intent = new Intent(this, )
+
 
         }
+    }
 
 }
