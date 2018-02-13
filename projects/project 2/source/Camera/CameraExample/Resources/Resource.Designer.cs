@@ -90,6 +90,9 @@ namespace CameraExample
 			// aapt resource value: 0x7f08000c
 			public const int Revert = 2131230732;
 			
+			// aapt resource value: 0x7f08000d
+			public const int Save = 2131230733;
+			
 			// aapt resource value: 0x7f080000
 			public const int launchCameraButton = 2131230720;
 			

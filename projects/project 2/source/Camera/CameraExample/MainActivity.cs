@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
 using System;
-using Uri = Android.Net.Uri;
+using System.IO;
+using Android.Graphics;
 
 namespace CameraExample
 {
@@ -85,18 +86,22 @@ namespace CameraExample
             //android.support.v4.content.FileProvider
             //getUriForFile(getContext(), "com.mydomain.fileprovider", newFile);
             //FileProvider.GetUriForFile
-            intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
+            //intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
             StartActivityForResult(intent, 0);
 
         }
 
         private void openGalleryClick(object sender, System.EventArgs e)
         {
-            var galleryIntent = new Intent(Intent.ActionPick, MediaStore.Images.Media.ExternalContentUri);
-            galleryIntent.SetType("image/*");
-            galleryIntent.SetAction(Intent.ActionGetContent);
-            StartActivityForResult(Intent.CreateChooser(galleryIntent, "Select Picture"), 1);
+            Toast.MakeText(this, "Button not yet implemented", ToastLength.Short).Show();
+            //This code opens the gallary but I was not able to get the picture to work
+
+            //var galleryIntent = new Intent(Intent.ActionPick, MediaStore.Images.Media.ExternalContentUri);
+            //galleryIntent.SetType("image/*");
+            //galleryIntent.SetAction(Intent.ActionGetContent);
+            //StartActivityForResult(Intent.CreateChooser(galleryIntent, "Select Picture"), 1);
         }
+
 
         // Called automatically whenever an activity finishes
 
@@ -117,6 +122,7 @@ namespace CameraExample
             Button high_cont = FindViewById<Button>(Resource.Id.HighContrast);
             Button add_noise = FindViewById<Button>(Resource.Id.AddNoise);
             Button revert = FindViewById<Button>(Resource.Id.Revert);
+            Button save = FindViewById<Button>(Resource.Id.Save);
 
             //test to make sure the picture was found
             if ((resultCode == Result.Ok) && (data != null))
@@ -131,13 +137,6 @@ namespace CameraExample
                     mediaScanIntent.SetData(contentUri);
                     SendBroadcast(mediaScanIntent);
                 }
-
-                else
-                {
-                    //Uri uri = data.Data;
-                    //_file.SetImageURI(uri);
-
-                }
             }
 
             // Display in ImageView. We will resize the bitmap to fit the display.
@@ -146,7 +145,9 @@ namespace CameraExample
             ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
-            bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+            bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
+            bitmap = Android.Graphics.Bitmap.CreateScaledBitmap(bitmap, 1024, 768, true);
+
 
             if (bitmap != null)
             {
@@ -431,6 +432,28 @@ namespace CameraExample
                     Toast.MakeText(this, "The picture is the original.", ToastLength.Short).Show();
                 }
             };
+
+            save.Click += delegate
+            {
+                var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+                var filePath = System.IO.Path.Combine(sdCardPath, "ImageManip_{0}.png");
+                var stream = new FileStream(filePath, FileMode.Create);
+                bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+                stream.Close();
+                Toast.MakeText(this, "The picture was saved to gallery.", ToastLength.Short).Show();
+
+                SetContentView(Resource.Layout.Main);
+
+                if (IsThereAnAppToTakePictures() == true)
+                {
+                    CreateDirectoryForPictures();
+                    FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
+                    Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
+                    openGallery.Click += openGalleryClick;
+                }
+
+            };
+
 
 
 
