@@ -83,9 +83,6 @@ namespace CameraExample
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
             _file = new Java.IO.File(_dir, string.Format("myPhoto_{0}.jpg", System.Guid.NewGuid()));
-            //android.support.v4.content.FileProvider
-            //getUriForFile(getContext(), "com.mydomain.fileprovider", newFile);
-            //FileProvider.GetUriForFile
             //intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
             StartActivityForResult(intent, 0);
 
