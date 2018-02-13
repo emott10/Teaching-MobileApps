@@ -19,10 +19,17 @@ namespace CameraExample
         // Used to track the directory that we'll be writing to between functions
         public static Java.IO.File _dir;
 
+        //Used to track the bitmap original and copy throughout functions
+        Android.Graphics.Bitmap copyBitmap = null;
+        Android.Graphics.Bitmap bitmap = null;
+
         public override void OnBackPressed()
         {
             SetContentView(Resource.Layout.Main);
-            Toast.MakeText(this, "Back Button Pressed", ToastLength.Short).Show();
+            Toast.MakeText(this, "Back Pressed: Starting over", ToastLength.Short).Show();
+            copyBitmap = null;
+            bitmap = null;
+            
 
             //needed for the layout.main buttons to work
             if (IsThereAnAppToTakePictures() == true)
@@ -55,9 +62,7 @@ namespace CameraExample
         private bool IsThereAnAppToTakePictures()
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
-            IList<ResolveInfo> availableActivities =
-                PackageManager.QueryIntentActivities
-                (intent, PackageInfoFlags.MatchDefaultOnly);
+            IList<ResolveInfo> availableActivities = PackageManager.QueryIntentActivities(intent, PackageInfoFlags.MatchDefaultOnly);
             return availableActivities != null && availableActivities.Count > 0;
         }
 
@@ -100,7 +105,7 @@ namespace CameraExample
             base.OnActivityResult(requestCode, resultCode, data);
             SetContentView(Resource.Layout.PicManip);
             bool reverted = true;
-            Android.Graphics.Bitmap copyBitmap = null;
+            
 
             Button remred = FindViewById<Button>(Resource.Id.RemRed);
             Button remgreen = FindViewById<Button>(Resource.Id.RemGreen);
@@ -129,7 +134,7 @@ namespace CameraExample
 
                 else
                 {
-                    Uri uri = data.Data;
+                    //Uri uri = data.Data;
                     //_file.SetImageURI(uri);
 
                 }
@@ -141,7 +146,7 @@ namespace CameraExample
             ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
-            Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+            bitmap = _file.Path.LoadAndResizeBitmap(width, height);
 
             if (bitmap != null)
             {
@@ -369,70 +374,35 @@ namespace CameraExample
                         int g_temp = c.G;
                         int b_temp = c.B;
 
-                        if (rand_val < 0)
+                        r_temp += rand_val;
+                        g_temp += rand_val;
+                        b_temp += rand_val;
+
+                        if(r_temp > 255)
                         {
-                            if ((r_temp + rand_val) < 0)
-                            {
-                                r_temp = 0;
-                            }
-
-                            else
-                            {
-                                r_temp += rand_val;
-                            }
-
-                            if ((g_temp + rand_val) < 0)
-                            {
-                                g_temp = 0;
-                            }
-
-                            else
-                            {
-                                g_temp += rand_val;
-                            }
-
-                            if ((b_temp + rand_val) < 0)
-                            {
-                                b_temp = 0;
-                            }
-
-                            else
-                            {
-                                b_temp += rand_val;
-                            }
+                            r_temp = 255;
+                        }
+                        else if (r_temp<0)
+                        {
+                            r_temp = 0;
                         }
 
-                        else
+                        if (g_temp > 255)
                         {
-                            if ((r_temp + rand_val) > 255)
-                            {
-                                r_temp = 255;
-                            }
+                            g_temp = 255;
+                        }
+                        else if (g_temp < 0)
+                        {
+                            g_temp = 0;
+                        }
 
-                            else
-                            {
-                                r_temp += rand_val;
-                            }
-
-                            if ((g_temp + rand_val) > 255)
-                            {
-                                g_temp = 255;
-                            }
-
-                            else
-                            {
-                                g_temp += rand_val;
-                            }
-
-                            if ((b_temp + rand_val) > 255)
-                            {
-                                b_temp = 255;
-                            }
-
-                            else
-                            {
-                                b_temp += rand_val;
-                            }
+                        if (b_temp > 255)
+                        {
+                            b_temp = 255;
+                        }
+                        else if (b_temp < 0)
+                        {
+                            b_temp = 0;
                         }
 
                         c.R = Convert.ToByte(r_temp);
@@ -454,6 +424,11 @@ namespace CameraExample
                     copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
                     imageView.SetImageBitmap(copyBitmap);
                     reverted = true;
+                }
+
+                else if(reverted)
+                {
+                    Toast.MakeText(this, "The picture is the original.", ToastLength.Short).Show();
                 }
             };
 

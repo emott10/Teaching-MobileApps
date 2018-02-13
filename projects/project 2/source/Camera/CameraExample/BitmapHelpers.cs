@@ -27,7 +27,7 @@ namespace CameraExample
             int outWidth = options.OutWidth;
             int inSampleSize = 1;
 
-            if (outHeight > height || outWidth > width)
+            if (outHeight > height || outWidth > width && width != 0 && height != 0 )
             {
                 inSampleSize = outWidth > outHeight
                                    ? outHeight / height
