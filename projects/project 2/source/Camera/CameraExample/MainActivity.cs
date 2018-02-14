@@ -435,7 +435,7 @@ namespace CameraExample
                 var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
                 var filePath = System.IO.Path.Combine(sdCardPath, "ImageManip_{0}.png");
                 var stream = new FileStream(filePath, FileMode.Create);
-                bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+                copyBitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
                 stream.Close();
                 Toast.MakeText(this, "The picture was saved to gallery.", ToastLength.Short).Show();
 
