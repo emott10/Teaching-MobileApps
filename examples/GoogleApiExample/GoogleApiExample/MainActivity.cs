@@ -77,7 +77,7 @@ namespace GoogleApiExample
             }
 
             //credential is stored in "assets" folder
-            string credPath = "google_api.json";
+            string credPath = "API-Game-5a4cd35415e2.json";
             Google.Apis.Auth.OAuth2.GoogleCredential cred;
 
             //Load credentials into object form
@@ -93,7 +93,7 @@ namespace GoogleApiExample
             // environment variable. We are specifying our own credentials via json file.
             var client = new Google.Apis.Vision.v1.VisionService(new Google.Apis.Services.BaseClientService.Initializer()
             {
-                ApplicationName = "subtle-isotope-190917",
+                ApplicationName = "api-game-195221",
                 HttpClientInitializer = cred
             });
 
@@ -105,6 +105,8 @@ namespace GoogleApiExample
             //tell google that we want to perform label detection
             request.Features = new List<Google.Apis.Vision.v1.Data.Feature>();
             request.Features.Add(new Google.Apis.Vision.v1.Data.Feature() { Type = "LABEL_DETECTION" });
+
+            //add to list of items to send to google
             var batch = new Google.Apis.Vision.v1.Data.BatchAnnotateImagesRequest();
             batch.Requests = new List<Google.Apis.Vision.v1.Data.AnnotateImageRequest>();
             batch.Requests.Add(request);
@@ -112,6 +114,8 @@ namespace GoogleApiExample
             //send request.  Note that I'm calling execute() here, but you might want to use
             //ExecuteAsync instead
             var apiResult = client.Images.Annotate(batch).Execute();
+
+
 
             if (bitmap != null)
             {
