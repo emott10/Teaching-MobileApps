@@ -83,9 +83,7 @@ namespace CameraExample
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
             _file = new Java.IO.File(_dir, string.Format("myPhoto_{0}.jpg", System.Guid.NewGuid()));
-            //intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
             StartActivityForResult(intent, 0);
-
         }
 
         private void openGalleryClick(object sender, System.EventArgs e)
@@ -101,7 +99,6 @@ namespace CameraExample
 
 
         // Called automatically whenever an activity finishes
-
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
@@ -169,7 +166,6 @@ namespace CameraExample
 
             remred.Click += delegate
             {
-                //remred.SetBackgroundColor(Android.Graphics.Color.ParseColor("#ff5e5e"));
                 for (int i = 0; i < copyBitmap.Width; i++)
                 {
                     for (int j = 0; j < copyBitmap.Height; j++)
@@ -418,7 +414,6 @@ namespace CameraExample
             {
                 if (bitmap != null && !reverted)
                 {
-                    //remred.SetBackgroundColor(Android.Graphics.Color.ParseColor("#ff546e7a"));
                     copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
                     imageView.SetImageBitmap(copyBitmap);
                     reverted = true;
@@ -435,7 +430,7 @@ namespace CameraExample
                 var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
                 var filePath = System.IO.Path.Combine(sdCardPath, "ImageManip_{0}.png");
                 var stream = new FileStream(filePath, FileMode.Create);
-                bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+                copyBitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
                 stream.Close();
                 Toast.MakeText(this, "The picture was saved to gallery.", ToastLength.Short).Show();
 
@@ -450,10 +445,6 @@ namespace CameraExample
                 }
 
             };
-
-
-
-
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();
