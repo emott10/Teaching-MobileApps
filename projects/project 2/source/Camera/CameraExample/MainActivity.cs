@@ -38,7 +38,7 @@ namespace CameraExample
                 CreateDirectoryForPictures();
                 FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
                 Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
-                openGallery.Click += openGalleryClick;
+                openGallery.Click += OpenGalleryClick;
             }
         }
 
@@ -54,7 +54,7 @@ namespace CameraExample
                 CreateDirectoryForPictures();
                 FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
                 Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
-                openGallery.Click += openGalleryClick;
+                openGallery.Click += OpenGalleryClick;
             }
         }
 
@@ -86,7 +86,7 @@ namespace CameraExample
             StartActivityForResult(intent, 0);
         }
 
-        private void openGalleryClick(object sender, System.EventArgs e)
+        private void OpenGalleryClick(object sender, System.EventArgs e)
         {
             Toast.MakeText(this, "Button not yet implemented", ToastLength.Short).Show();
             //This code opens the gallary but I was not able to get the picture to work
@@ -160,7 +160,7 @@ namespace CameraExample
                     CreateDirectoryForPictures();
                     FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
                     Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
-                    openGallery.Click += openGalleryClick;
+                    openGallery.Click += OpenGalleryClick;
                 }
             }
 
@@ -441,7 +441,7 @@ namespace CameraExample
                     CreateDirectoryForPictures();
                     FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
                     Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
-                    openGallery.Click += openGalleryClick;
+                    openGallery.Click += OpenGalleryClick;
                 }
 
             };

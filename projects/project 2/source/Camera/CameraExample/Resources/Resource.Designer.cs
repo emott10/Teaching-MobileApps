@@ -135,7 +135,7 @@ namespace CameraExample
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int icon = 2130837504;
 			
 			static Mipmap()
 			{
