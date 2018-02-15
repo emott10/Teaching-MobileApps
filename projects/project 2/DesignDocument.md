@@ -20,5 +20,7 @@ Step 4: If you end up not liking an effect that you applied then you can use the
 
 Step 5: If you like the picture and want to save it, scroll to the bottom of the effects and this is were you can save the photo. 
         SideNote: This only worked the first time I tried to save the picture after that the picture didn't show up in the gallery.
+        Sidenote 2: The next day after turning in the project, I realized that the app was saving the pictures to the gallery but it was 
+        saving the original photo and not the one with the effects. I will be fixing this later (not for credit of course)
 
 Step 6: If you want to start over at ANY time just simple push the back button on your android device and it will take you back to the           first screen, where you can take a photo or pick on from the gallery.
