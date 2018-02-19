@@ -24,6 +24,7 @@ namespace CameraExample
         Android.Graphics.Bitmap copyBitmap = null;
         Android.Graphics.Bitmap bitmap = null;
 
+        //If the back button is pressed go back to the main layout to start over
         public override void OnBackPressed()
         {
             SetContentView(Resource.Layout.Main);
@@ -42,6 +43,7 @@ namespace CameraExample
             }
         }
 
+        //called on the start of the app to create the main layout to the screen
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -78,7 +80,8 @@ namespace CameraExample
                 _dir.Mkdirs();
             }
         }
-
+        
+        //This function opens the camera app to take a picture
         private void TakePicture(object sender, System.EventArgs e)
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
@@ -86,10 +89,11 @@ namespace CameraExample
             StartActivityForResult(intent, 0);
         }
 
+        //Opens the gallery for the user to pick a picture
         private void OpenGalleryClick(object sender, System.EventArgs e)
         {
             Toast.MakeText(this, "Button not yet implemented", ToastLength.Short).Show();
-            //This code opens the gallary but I was not able to get the picture to work
+            //This code opens the gallary but I was not able to get the picture to work (W.I.P.)
 
             //var galleryIntent = new Intent(Intent.ActionPick, MediaStore.Images.Media.ExternalContentUri);
             //galleryIntent.SetType("image/*");
@@ -142,7 +146,7 @@ namespace CameraExample
             bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
             bitmap = Android.Graphics.Bitmap.CreateScaledBitmap(bitmap, 1024, 768, true);
 
-
+            //check to make sure the bitmap has data we can manipulate
             if (bitmap != null)
             {
                 copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
@@ -164,6 +168,7 @@ namespace CameraExample
                 }
             }
 
+            //Removes the red in the picture by setting the red pixel to 0
             remred.Click += delegate
             {
                 for (int i = 0; i < copyBitmap.Width; i++)
@@ -182,6 +187,7 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Removes the green in the picture by setting the green pixel to 0
             remgreen.Click += delegate
             {
                 for (int i = 0; i < copyBitmap.Width; i++)
@@ -200,6 +206,7 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Removes the blue in the picture by setting the blue pixel to 0
             remblue.Click += delegate
             {
                 for (int i = 0; i < copyBitmap.Width; i++)
@@ -218,6 +225,7 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Negates the red in the picture by subtracting 255 from the current red pixels value
             negred.Click += delegate
             {
                 for (int i = 0; i < copyBitmap.Width; i++)
@@ -237,6 +245,7 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Negates the green in the picture by subtracting 255 from the current green pixels value
             neggreen.Click += delegate
             {
                 for (int i = 0; i < copyBitmap.Width; i++)
@@ -256,6 +265,7 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Negates the blue in the picture by subtracting 255 from the current blue pixels value
             negblue.Click += delegate
             {
                 for (int i = 0; i < copyBitmap.Width; i++)
@@ -275,6 +285,8 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Converts the picture to greyscale by averaging all the pixels values
+            //Then setting the each pixel to the average
             greyscale.Click += delegate
             {
                 for (int i = 0; i < copyBitmap.Width; i++)
@@ -300,6 +312,8 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Converts the picture to high contrast
+            //If the pixel > 127.5, then set to 255, else set to 0
             high_cont.Click += delegate
             {
                 for (int i = 0; i < copyBitmap.Width; i++)
@@ -353,6 +367,9 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Adds random noise to the picture
+            //Get a random value from -10 - 10, and add it to the pixels value 
+            //making sure the pixel value doesn't go over 255 or under 0.
             add_noise.Click += delegate
             {
                 Random rnd = new Random();
@@ -410,6 +427,7 @@ namespace CameraExample
                 reverted = false;
             };
 
+            //Button used to revert the image effects back to the orginal picture
             revert.Click += delegate
             {
                 if (bitmap != null && !reverted)
@@ -425,6 +443,7 @@ namespace CameraExample
                 }
             };
 
+            //Saves the image to the users gallery
             save.Click += delegate
             {
                 var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
