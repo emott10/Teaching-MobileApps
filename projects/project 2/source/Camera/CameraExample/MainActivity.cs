@@ -31,23 +31,19 @@ namespace CameraExample
             Toast.MakeText(this, "Back Pressed: Starting over", ToastLength.Short).Show();
             copyBitmap = null;
             bitmap = null;
-            
-
-            //needed for the layout.main buttons to work
-            if (IsThereAnAppToTakePictures() == true)
-            {
-                CreateDirectoryForPictures();
-                FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
-                Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
-                openGallery.Click += OpenGalleryClick;
-            }
+            StartMainLayout();
         }
 
         //called on the start of the app to create the main layout to the screen
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            StartMainLayout();
+        }
 
+        //Starts the main layout, and makes the button functional
+        private void StartMainLayout()
+        {
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
@@ -156,16 +152,7 @@ namespace CameraExample
             else
             {
                 //If bitmap is null takes the user back to the original screen
-                SetContentView(Resource.Layout.Main);
-
-                //needed for the layout.main buttons to work
-                if (IsThereAnAppToTakePictures() == true)
-                {
-                    CreateDirectoryForPictures();
-                    FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
-                    Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
-                    openGallery.Click += OpenGalleryClick;
-                }
+                StartMainLayout();
             }
 
             //Removes the red in the picture by setting the red pixel to 0
@@ -453,16 +440,7 @@ namespace CameraExample
                 stream.Close();
                 Toast.MakeText(this, "The picture was saved to gallery.", ToastLength.Short).Show();
 
-                SetContentView(Resource.Layout.Main);
-
-                if (IsThereAnAppToTakePictures() == true)
-                {
-                    CreateDirectoryForPictures();
-                    FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
-                    Button openGallery = FindViewById<Button>(Resource.Id.openGallery);
-                    openGallery.Click += OpenGalleryClick;
-                }
-
+                StartMainLayout();
             };
 
             // Dispose of the Java side bitmap.
