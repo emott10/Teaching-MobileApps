@@ -286,3 +286,4 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/examples/GoogleApiExample/GoogleApiExample/Assets/API-Game-7e75c497f0b6.json

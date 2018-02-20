@@ -25,11 +25,8 @@ namespace GoogleApiExample
             }
         }
 
-        /// <summary>
         /// Apparently, some android devices do not have a camera.  To guard against this,
         /// we need to make sure that we can take pictures before we actually try to take a picture.
-        /// </summary>
-        /// <returns></returns>
         private bool IsThereAnAppToTakePictures()
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
@@ -46,12 +43,7 @@ namespace GoogleApiExample
             StartActivityForResult(intent, 0);
         }
 
-        // <summary>
         // Called automatically whenever an activity finishes
-        // </summary>
-        // <param name = "requestCode" ></ param >
-        // < param name="resultCode"></param>
-        /// <param name="data"></param>
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
