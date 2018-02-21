@@ -9,16 +9,20 @@ using Android.Support.V7.App;
 
 namespace GoogleApiExample
 {
-    [Activity(Label = "GoogleApiExample", Icon = "@mipmap/icon")]
+    [Activity(Label = "iFindIt", Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        string label = null;
+        string label1 = null;
+        string label2 = null;
+        string label3 = null;
         Android.Graphics.Bitmap bitmap;
         ImageView imageView;
+        private Vibrator myVib;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            myVib = (Vibrator)GetSystemService(VibratorService);
 
             StartMainLayout();
         }
@@ -38,6 +42,7 @@ namespace GoogleApiExample
         //If the back button is pressed go back to the main layout to start over
         public override void OnBackPressed()
         {
+            myVib.Vibrate(30);
             SetContentView(Resource.Layout.Main);
             Toast.MakeText(this, "Back Pressed: Starting over", ToastLength.Short).Show();
             StartMainLayout();
@@ -57,6 +62,7 @@ namespace GoogleApiExample
 
         private void TakePicture(object sender, System.EventArgs e)
         {
+            myVib.Vibrate(30);
             Intent intent = new Intent(MediaStore.ActionImageCapture);
             StartActivityForResult(intent, 0);
         }
@@ -93,8 +99,7 @@ namespace GoogleApiExample
                 string bitmapString = "";
                 using (var stream = new System.IO.MemoryStream())
                 {
-                    bitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 0, stream);
-
+                    bitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 95, stream);
                     var bytes = stream.ToArray();
                     bitmapString = System.Convert.ToBase64String(bytes);
                 }
@@ -140,10 +145,16 @@ namespace GoogleApiExample
                 var apiResult = client.Images.Annotate(batch).Execute();
 
                 //Take the label result and through it into a string
-                label = apiResult.Responses[0].LabelAnnotations[0].Description;
-                FindViewById<TextView>(Resource.Id.labelResult).Text = label;
+                label1 = apiResult.Responses[0].LabelAnnotations[0].Description;
+                label2 = apiResult.Responses[0].LabelAnnotations[1].Description;
+                label3 = apiResult.Responses[0].LabelAnnotations[2].Description;
+                FindViewById<TextView>(Resource.Id.labelResult1).Text = label1;
+                FindViewById<TextView>(Resource.Id.labelResult2).Text = label2;
+                FindViewById<TextView>(Resource.Id.labelResult3).Text = label3;
 
-                string pic_result = apiResult.Responses[0].LabelAnnotations[0].Description;
+                //string pic_result1 = apiResult.Responses[0].LabelAnnotations[0].Description;
+                //string pic_result2 = apiResult.Responses[1].LabelAnnotations[1].Description;
+                //string pic_result3 = apiResult.Responses[2].LabelAnnotations[2].Description;
 
                 imageView.SetImageBitmap(bitmap);
                 bitmap = null;
