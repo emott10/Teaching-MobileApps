@@ -5,10 +5,11 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
+using Android.Support.V7.App;
 
 namespace GoogleApiExample
 {
-    [Activity(Label = "GoogleApiExample", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "GoogleApiExample", Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
         string label = null;
