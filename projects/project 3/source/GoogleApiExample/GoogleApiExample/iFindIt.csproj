@@ -123,6 +123,9 @@
     <AndroidResource Include="Resources\layout\GoFind.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\GameOver.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\Results.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

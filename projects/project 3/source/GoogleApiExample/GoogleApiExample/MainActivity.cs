@@ -14,7 +14,6 @@ namespace GoogleApiExample
     public class MainActivity : Activity
     {
         int total_points = 0;
-        int count = 0;
         Android.Graphics.Bitmap bitmap;
         ImageView imageView;
         private Vibrator myVib;
@@ -68,10 +67,10 @@ namespace GoogleApiExample
             TextView whatToFind = (TextView)FindViewById(Resource.Id.whatToFind);
 
 
-            String[] WordList = { "technology", "computer keyboard", "basketball" , "circle", "car", "umbrella"};
+            String[] WordList = { "technology", "computer keyboard", "basketball" , "circle", "car", "umbrella", "bottle", "clock"};
 
             Random rnd = new Random();
-            int rand = rnd.Next(0,3);
+            int rand = rnd.Next(0,8);
 
             whatToFind.Text = (WordList[rand]);
             GivenWord = WordList[rand];
@@ -98,11 +97,13 @@ namespace GoogleApiExample
             
             int rank = -1;
             float score = 0;
+            bool found = false;
             base.OnActivityResult(requestCode, resultCode, data);
             SetContentView(Resource.Layout.Results);
 
             TextView result = (TextView)FindViewById(Resource.Id.result);
             TextView percentage = (TextView)FindViewById(Resource.Id.percentage);
+            Button nextTurn = FindViewById<Button>(Resource.Id.nextTurn);
 
             //Test to make sure user took a picture
             if (data != null)
@@ -176,37 +177,40 @@ namespace GoogleApiExample
                 //ExecuteAsync instead
                 var apiResult = client.Images.Annotate(batch).Execute();
 
-                count = apiResult.Responses[0].LabelAnnotations.Count;
-
-                for (int i = 0; i < count; i++)
+                for (int i = 0; i < apiResult.Responses[0].LabelAnnotations.Count; i++)
                 {
                     if (GivenWord == apiResult.Responses[0].LabelAnnotations[i].Description)
                     {
                         rank = i;
+                        found = true;
                     }
                 }
 
-                score = (float)(apiResult.Responses[0].LabelAnnotations[rank].Score);
-                score *= 100;
-
-
-                if (rank != -1)
+                //check to make sure the user found the object
+                if (found)
                 {
+                    score = (float)(apiResult.Responses[0].LabelAnnotations[rank].Score);
+                    score *= 100;
                     result.Text = ("Correct!! +10 Points");
-                    percentage.Text = ("Your picture was " + score + "% accurate!" );
+                    percentage.Text = ("Your picture was " + score + "% accurate!");
                     total_points += 10;
 
                     if (total_points >= 100)
                     {
                         //implement
-
+                        SetContentView(Resource.Layout.GameOver);
                     }
                 }
 
                 else
                 {
-                    result.Text = ("LOSER!!");
+                    result.Text = ("You did not take a picture of " + GivenWord);
                 }
+
+                nextTurn.Click += delegate
+                {
+                    startFindIt();
+                };
 
                 imageView.SetImageBitmap(bitmap);
                 bitmap = null;
