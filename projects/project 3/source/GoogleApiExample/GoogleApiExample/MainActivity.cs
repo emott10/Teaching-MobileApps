@@ -7,6 +7,7 @@ using Android.Content.PM;
 using Android.Provider;
 using Android.Support.V7.App;
 using System;
+using System.Linq;
 
 namespace GoogleApiExample
 {
@@ -37,7 +38,7 @@ namespace GoogleApiExample
 
             startGame.Click += delegate
             {
-                startFindIt();
+                StartFindIt();
             };
         }
 
@@ -61,23 +62,58 @@ namespace GoogleApiExample
             return availableActivities != null && availableActivities.Count > 0;
         }
 
-        private void startFindIt()
+        private void StartFindIt()
         {
+            string CapWord;
             SetContentView(Resource.Layout.GoFind);
             TextView whatToFind = (TextView)FindViewById(Resource.Id.whatToFind);
-
+            ImageView pictureToTake = (ImageView)FindViewById(Resource.Id.pictureToTake);
 
             String[] WordList = { "technology", "computer keyboard", "basketball" , "circle", "car", "umbrella", "bottle", "clock"};
 
             Random rnd = new Random();
             int rand = rnd.Next(0,8);
 
-            whatToFind.Text = (WordList[rand]);
+            //sets the givenword to the random word selected
             GivenWord = WordList[rand];
+
+            ///Capitalize the first letter in the string
+            CapWord = GivenWord.First().ToString().ToUpper() + GivenWord.Substring(1);
+            whatToFind.Text = (CapWord);
+
+            switch (GivenWord)
+            {
+                case "clock":
+                    pictureToTake.SetImageResource(Resource.Drawable.clock);
+                    break;
+                case "technology":
+                    pictureToTake.SetImageResource(Resource.Drawable.technology);
+                    break;
+                case "computer keyboard":
+                    pictureToTake.SetImageResource(Resource.Drawable.keyboard);
+                    break;
+                case "basketball":
+                    pictureToTake.SetImageResource(Resource.Drawable.basketball);
+                    break;
+                case "circle":
+                    pictureToTake.SetImageResource(Resource.Drawable.circle);
+                    break;
+                case "car":
+                    pictureToTake.SetImageResource(Resource.Drawable.car);
+                    break;
+                case "umbrella":
+                    pictureToTake.SetImageResource(Resource.Drawable.umbrella);
+                    break;
+                case "bottle":
+                    pictureToTake.SetImageResource(Resource.Drawable.bottle);
+                    break;
+            }
+
+            
 
             if (IsThereAnAppToTakePictures() == true)
             {
-                FindViewById<Button>(Resource.Id.go).Click += TakePicture;
+                FindViewById<ImageButton>(Resource.Id.start).Click += TakePicture;
             }
            
 
@@ -209,7 +245,7 @@ namespace GoogleApiExample
 
                 nextTurn.Click += delegate
                 {
-                    startFindIt();
+                    StartFindIt();
                 };
 
                 imageView.SetImageBitmap(bitmap);
