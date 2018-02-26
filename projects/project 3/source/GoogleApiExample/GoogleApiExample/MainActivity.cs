@@ -164,7 +164,7 @@ namespace GoogleApiExample
 
             TextView result = (TextView)FindViewById(Resource.Id.result);
             TextView percentage = (TextView)FindViewById(Resource.Id.percentage);
-            Button nextTurn = FindViewById<Button>(Resource.Id.nextTurn);
+            ImageButton nextTurn = (ImageButton)FindViewById(Resource.Id.nextTurn);
 
             //Test to make sure user took a picture
             if (data != null)
@@ -254,7 +254,7 @@ namespace GoogleApiExample
                     score *= 100;
                     result.Text = ("Correct!! +10 Points");
                     percentage.Text = ("Your picture was " + score + "% accurate!");
-                    total_points += 30;
+                    total_points += 10;
 
                     if (total_points >= 30)
                     {
@@ -264,7 +264,7 @@ namespace GoogleApiExample
 
                 else
                 {
-                    result.Text = ("You did not take a picture of " + GivenWord);
+                    result.Text = ("You did not take a picture of a " + GivenWord);
                 }
 
                 nextTurn.Click += delegate
@@ -289,9 +289,14 @@ namespace GoogleApiExample
 
             timer.Stop();
             timer_view.Text = "It took you ";
-            if (min > 0)
+            if (min == 1)
             {
-                timer_view.Text += min + "minutes " + sec + " seconds to find the items! Good Job!";
+                timer_view.Text += min + " minute " + sec + " seconds to find the items! Good Job!";
+            }
+
+            else if(min > 1)
+            {
+                timer_view.Text += min + " minutes " + sec + " seconds to find the items! Good Job!";
             }
 
             else
