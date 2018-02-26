@@ -8,6 +8,7 @@ using Android.Provider;
 using Android.Support.V7.App;
 using System;
 using System.Linq;
+using System.Timers;
 
 namespace GoogleApiExample
 {
@@ -19,6 +20,11 @@ namespace GoogleApiExample
         ImageView imageView;
         private Vibrator myVib;
         string GivenWord;
+        Timer timer;
+        bool timer_start = false;
+        int min = 0;
+        int sec = 0;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -113,12 +119,31 @@ namespace GoogleApiExample
 
             if (IsThereAnAppToTakePictures() == true)
             {
+                //starts timer for how long it takes the user to win
+                if (!timer_start)
+                {
+                    timer = new Timer();
+                    timer.Interval = 1000;
+                    timer.Elapsed += Timer_Elapsed;
+                    timer.Start();
+                    timer_start = true;
+                }
+
                 FindViewById<ImageButton>(Resource.Id.start).Click += TakePicture;
             }
-           
+
 
         }
 
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            sec++;
+            if(sec == 60)
+            {
+                min++;
+                sec = 0;
+            }
+        }
 
         private void TakePicture(object sender, System.EventArgs e)
         {
@@ -229,12 +254,11 @@ namespace GoogleApiExample
                     score *= 100;
                     result.Text = ("Correct!! +10 Points");
                     percentage.Text = ("Your picture was " + score + "% accurate!");
-                    total_points += 10;
+                    total_points += 30;
 
-                    if (total_points >= 100)
+                    if (total_points >= 30)
                     {
-                        //implement
-                        SetContentView(Resource.Layout.GameOver);
+                        Gameover();
                     }
                 }
 
@@ -254,6 +278,34 @@ namespace GoogleApiExample
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();
+        }
+
+        //used to start the game over screen
+        private void Gameover()
+        {
+            SetContentView(Resource.Layout.GameOver);
+            TextView timer_view = (TextView)FindViewById(Resource.Id.timer);
+            ImageButton startGame = FindViewById<ImageButton>(Resource.Id.start_game);
+
+            timer.Stop();
+            timer_view.Text = "It took you ";
+            if (min > 0)
+            {
+                timer_view.Text += min + "minutes " + sec + " seconds to find the items! Good Job!";
+            }
+
+            else
+            {
+                timer_view.Text += sec + " seconds to find the items! Good Job!";
+            }
+
+            timer = null;
+            timer_start = false;
+
+            startGame.Click += delegate
+            {
+                StartMainLayout();
+            };
         }
     }
 }
