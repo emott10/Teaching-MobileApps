@@ -32,5 +32,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/nextTurn"
         android:src="@drawable/continue_button"
-        android:background="#ffffffff"/>
+        android:background="#ffffffff" />
 </LinearLayout>

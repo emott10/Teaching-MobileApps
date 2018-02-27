@@ -25,6 +25,10 @@ namespace GoogleApiExample
         int min = 0;
         int sec = 0;
 
+        /// Used to track the file/directory that we're manipulating between functions
+        public static Java.IO.File _file;
+        public static Java.IO.File _dir;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -41,6 +45,10 @@ namespace GoogleApiExample
             SetContentView(Resource.Layout.Main);
 
             ImageButton startGame = FindViewById<ImageButton>(Resource.Id.start_game);
+            if(IsThereAnAppToTakePictures())
+            {
+                CreateDirectoryForPictures();
+            }
 
             startGame.Click += delegate
             {
@@ -66,6 +74,19 @@ namespace GoogleApiExample
                 PackageManager.QueryIntentActivities
                 (intent, PackageInfoFlags.MatchDefaultOnly);
             return availableActivities != null && availableActivities.Count > 0;
+        }
+
+       
+        // Creates a directory on the phone that we can place our images
+        private void CreateDirectoryForPictures()
+        {
+            _dir = new Java.IO.File(
+                Android.OS.Environment.GetExternalStoragePublicDirectory(
+                    Android.OS.Environment.DirectoryPictures), "iFindIt");
+            if (!_dir.Exists())
+            {
+                _dir.Mkdirs();
+            }
         }
 
         private void StartFindIt()
@@ -149,6 +170,8 @@ namespace GoogleApiExample
         {
             myVib.Vibrate(30);
             Intent intent = new Intent(MediaStore.ActionImageCapture);
+            _file = new Java.IO.File(_dir, string.Format("iFindIt_{0}.jpg", System.Guid.NewGuid()));
+            intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
             StartActivityForResult(intent, 0);
         }
 
@@ -167,22 +190,22 @@ namespace GoogleApiExample
             ImageButton nextTurn = (ImageButton)FindViewById(Resource.Id.nextTurn);
 
             //Test to make sure user took a picture
-            if (data != null)
+            if (_file != null)
             {
                 // Display in ImageView. We will resize the bitmap to fit the display.
                 // Loading the full sized image will consume too much memory
                 // and cause the application to crash.
                 imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
                 int height = Resources.DisplayMetrics.HeightPixels;
-                int width = imageView.Height;
+                int width = 1024;
 
-                //AC: workaround for not passing actual files
-                bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
+                //load picture from file
+                bitmap = _file.Path.LoadAndResizeBitmap(width, height);
             }
 
             else
             {
-                Toast.MakeText(this, "Error: Starting over", ToastLength.Short).Show();
+                Toast.MakeText(this, "Error: Could not find the file", ToastLength.Short).Show();
                 StartMainLayout();
             }
 
@@ -274,6 +297,12 @@ namespace GoogleApiExample
 
                 imageView.SetImageBitmap(bitmap);
                 bitmap = null;
+            }
+
+            else
+            {
+                Toast.MakeText(this, "Error: Bitmap null", ToastLength.Short).Show();
+                StartMainLayout();
             }
 
             // Dispose of the Java side bitmap.
