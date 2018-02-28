@@ -18,16 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#ffffffff" />
-    <Button
+    <ImageButton
         android:text="Next Turn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:id="@+id/nextTurn"
         android:src="@drawable/continue_button"
         android:background="#ffffffff" />
-=======
-        android:id="@+id/nextTurn" />
-  
->>>>>>> parent of d2c0f10... Changed the look of the results layout and fixed some wording on the text output
 </LinearLayout>
