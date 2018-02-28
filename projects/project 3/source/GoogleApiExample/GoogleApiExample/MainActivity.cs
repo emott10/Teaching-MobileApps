@@ -25,10 +25,6 @@ namespace GoogleApiExample
         int min = 0;
         int sec = 0;
 
-        /// Used to track the file/directory that we're manipulating between functions
-        public static Java.IO.File _file;
-        public static Java.IO.File _dir;
-
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,10 +41,6 @@ namespace GoogleApiExample
             SetContentView(Resource.Layout.Main);
 
             ImageButton startGame = FindViewById<ImageButton>(Resource.Id.start_game);
-            if(IsThereAnAppToTakePictures())
-            {
-                CreateDirectoryForPictures();
-            }
 
             startGame.Click += delegate
             {
@@ -76,19 +68,6 @@ namespace GoogleApiExample
             return availableActivities != null && availableActivities.Count > 0;
         }
 
-       
-        // Creates a directory on the phone that we can place our images
-        private void CreateDirectoryForPictures()
-        {
-            _dir = new Java.IO.File(
-                Android.OS.Environment.GetExternalStoragePublicDirectory(
-                    Android.OS.Environment.DirectoryPictures), "iFindIt");
-            if (!_dir.Exists())
-            {
-                _dir.Mkdirs();
-            }
-        }
-
         private void StartFindIt()
         {
             string CapWord;
@@ -96,10 +75,10 @@ namespace GoogleApiExample
             TextView whatToFind = (TextView)FindViewById(Resource.Id.whatToFind);
             ImageView pictureToTake = (ImageView)FindViewById(Resource.Id.pictureToTake);
 
-            String[] WordList = { "technology", "computer keyboard", "basketball" , "circle", "car", "umbrella", "bottle", "clock"};
+            String[] WordList = { "technology", "computer keyboard", "house", "circle", "car", "umbrella", "bottle", "clock" };
 
             Random rnd = new Random();
-            int rand = rnd.Next(0,8);
+            int rand = rnd.Next(0, 8);
 
             //sets the givenword to the random word selected
             GivenWord = WordList[rand];
@@ -119,8 +98,8 @@ namespace GoogleApiExample
                 case "computer keyboard":
                     pictureToTake.SetImageResource(Resource.Drawable.keyboard);
                     break;
-                case "basketball":
-                    pictureToTake.SetImageResource(Resource.Drawable.basketball);
+                case "house":
+                    pictureToTake.SetImageResource(Resource.Drawable.house);
                     break;
                 case "circle":
                     pictureToTake.SetImageResource(Resource.Drawable.circle);
@@ -134,9 +113,11 @@ namespace GoogleApiExample
                 case "bottle":
                     pictureToTake.SetImageResource(Resource.Drawable.bottle);
                     break;
+                default:
+                    break;
             }
 
-            
+
 
             if (IsThereAnAppToTakePictures() == true)
             {
@@ -159,7 +140,7 @@ namespace GoogleApiExample
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             sec++;
-            if(sec == 60)
+            if (sec == 60)
             {
                 min++;
                 sec = 0;
@@ -170,15 +151,13 @@ namespace GoogleApiExample
         {
             myVib.Vibrate(30);
             Intent intent = new Intent(MediaStore.ActionImageCapture);
-            _file = new Java.IO.File(_dir, string.Format("iFindIt_{0}.jpg", System.Guid.NewGuid()));
-            intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
             StartActivityForResult(intent, 0);
         }
 
         // Called automatically whenever an activity finishes
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            
+
             int rank = -1;
             float score = 0;
             bool found = false;
@@ -187,25 +166,25 @@ namespace GoogleApiExample
 
             TextView result = (TextView)FindViewById(Resource.Id.result);
             TextView percentage = (TextView)FindViewById(Resource.Id.percentage);
-            Button nextTurn = FindViewById<Button>(Resource.Id.nextTurn);
+            ImageButton nextTurn = (ImageButton)FindViewById(Resource.Id.nextTurn);
 
             //Test to make sure user took a picture
-            if (_file != null)
+            if (data != null)
             {
                 // Display in ImageView. We will resize the bitmap to fit the display.
                 // Loading the full sized image will consume too much memory
                 // and cause the application to crash.
                 imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
                 int height = Resources.DisplayMetrics.HeightPixels;
-                int width = 1024;
+                int width = imageView.Height;
 
-                //load picture from file
-                bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+                //AC: workaround for not passing actual files
+                bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
             }
 
             else
             {
-                Toast.MakeText(this, "Error: Could not find the file", ToastLength.Short).Show();
+                Toast.MakeText(this, "Error: Starting over", ToastLength.Short).Show();
                 StartMainLayout();
             }
 
@@ -277,32 +256,29 @@ namespace GoogleApiExample
                     score *= 100;
                     result.Text = ("Correct!! +10 Points");
                     percentage.Text = ("Your picture was " + score + "% accurate!");
-                    total_points += 30;
-
-                    if (total_points >= 30)
-                    {
-                        Gameover();
-                    }
+                    total_points += 10;
                 }
 
                 else
                 {
-                    result.Text = ("You did not take a picture of " + GivenWord);
+                    result.Text = ("You did not take a picture of a " + GivenWord);
                 }
 
                 nextTurn.Click += delegate
                 {
-                    StartFindIt();
+                    if (total_points >= 30)
+                    {
+                        Gameover();
+                    }
+
+                    else
+                    {
+                        StartFindIt();
+                    }
                 };
 
                 imageView.SetImageBitmap(bitmap);
                 bitmap = null;
-            }
-
-            else
-            {
-                Toast.MakeText(this, "Error: Bitmap null", ToastLength.Short).Show();
-                StartMainLayout();
             }
 
             // Dispose of the Java side bitmap.
@@ -318,9 +294,14 @@ namespace GoogleApiExample
 
             timer.Stop();
             timer_view.Text = "It took you ";
-            if (min > 0)
+            if (min == 1)
             {
-                timer_view.Text += min + "minutes " + sec + " seconds to find the items! Good Job!";
+                timer_view.Text += min + " minute " + sec + " seconds to find the items! Good Job!";
+            }
+
+            else if (min > 1)
+            {
+                timer_view.Text += min + " minutes " + sec + " seconds to find the items! Good Job!";
             }
 
             else
@@ -328,8 +309,12 @@ namespace GoogleApiExample
                 timer_view.Text += sec + " seconds to find the items! Good Job!";
             }
 
+            timer.Dispose();
             timer = null;
             timer_start = false;
+            total_points = 0;
+            min = 0;
+            sec = 0;
 
             startGame.Click += delegate
             {
@@ -338,4 +323,5 @@ namespace GoogleApiExample
         }
     }
 }
+
 
