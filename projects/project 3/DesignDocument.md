@@ -3,6 +3,10 @@ iFindIt is a game based on the Google Vision API which asks the user to find a c
 
 ## System Design 
 This is where you specify all of the system's requirements.  This section should accurately portray the complete operation of your application.  Provide scenarios, use cases, system requirements, and diagrams/screenshots of the system.
+Requirements:
+1) Android Phone with camera
+2) Internet access
+3) 
 
 
 ## Usage
