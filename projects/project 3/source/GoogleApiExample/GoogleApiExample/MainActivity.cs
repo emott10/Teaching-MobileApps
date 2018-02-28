@@ -44,6 +44,7 @@ namespace GoogleApiExample
 
             startGame.Click += delegate
             {
+                myVib.Vibrate(30);
                 StartFindIt();
             };
         }
@@ -266,6 +267,8 @@ namespace GoogleApiExample
 
                 nextTurn.Click += delegate
                 {
+                    myVib.Vibrate(30);
+
                     if (total_points >= 30)
                     {
                         Gameover();
@@ -318,6 +321,7 @@ namespace GoogleApiExample
 
             startGame.Click += delegate
             {
+                myVib.Vibrate(30);
                 StartMainLayout();
             };
         }
