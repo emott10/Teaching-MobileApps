@@ -27,7 +27,7 @@ If the user was wrong the app will give a nice message saying that they did not 
 
 ![Screenshot](incorrect.png)
 
-At this point the user can push "Continue" to try again, or if the user was right and they have 30 points the app will take them to the Winner screen. At which point they can see how long it took them to find the objects and restart if they so chose.
+At this point the user can push "Continue" to try again, or if the user was right and they have 30 points the app will take them to the Winner screen(below). At which point they can see how long it took them to find the objects and restart if they so chose.
 
 ![Screenshot](winner.png)
 
