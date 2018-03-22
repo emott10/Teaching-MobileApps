@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaxy Shooter.Plugins", "Galaxy Shooter.Plugins.csproj", "{BD27B5F5-578E-2820-498C-63FF32D371B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaxy Shooter", "Galaxy Shooter.csproj", "{161EDC5D-40D5-939C-C0BC-58249E9E7D3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Galaxy Shooter.Editor.Plugins", "Galaxy Shooter.Editor.Plugins.csproj", "{859C6FC3-52AA-BD1D-4C35-C4F60C16BD63}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD27B5F5-578E-2820-498C-63FF32D371B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD27B5F5-578E-2820-498C-63FF32D371B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD27B5F5-578E-2820-498C-63FF32D371B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD27B5F5-578E-2820-498C-63FF32D371B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{161EDC5D-40D5-939C-C0BC-58249E9E7D3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{161EDC5D-40D5-939C-C0BC-58249E9E7D3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{161EDC5D-40D5-939C-C0BC-58249E9E7D3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{161EDC5D-40D5-939C-C0BC-58249E9E7D3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{859C6FC3-52AA-BD1D-4C35-C4F60C16BD63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859C6FC3-52AA-BD1D-4C35-C4F60C16BD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859C6FC3-52AA-BD1D-4C35-C4F60C16BD63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859C6FC3-52AA-BD1D-4C35-C4F60C16BD63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
